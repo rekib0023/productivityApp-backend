@@ -53,7 +53,7 @@ class Signin(Resource):
         if not user:
             return {"error": "User does not exist"}, 400
         if not bcrypt.check_password_hash(user.password, json_data["password"]):
-            return {"error": "Password incorrect"}, 400
+            return {"error": "Email/Password incorrect"}, 400
         return {"token": user.authKey}, 200
 
 class Authorize(Resource):
@@ -65,4 +65,4 @@ class Authorize(Resource):
         if not user:
             return {"error": "User does not exist"}, 400
         user = user_schema.dump(user)
-        return {"user": user}, 200
+        return user, 200
